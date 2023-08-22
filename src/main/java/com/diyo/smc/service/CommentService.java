@@ -3,15 +3,11 @@ package com.diyo.smc.service;
 import com.diyo.smc.entity.Comment;
 import com.diyo.smc.entity.Post;
 import com.diyo.smc.entity.User;
-import com.diyo.smc.model.CommentDTO;
 import com.diyo.smc.repository.CommentRepository;
 import com.diyo.smc.repository.PostRepository;
 import com.diyo.smc.repository.UserRepository;
-import org.modelmapper.ModelMapper;
-import org.modelmapper.TypeToken;
 import org.springframework.stereotype.Service;
 
-import java.lang.reflect.Type;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -21,18 +17,15 @@ public class CommentService {
     private final CommentRepository commentRepository;
     private final PostRepository postRepository;
     private final UserRepository userRepository;
-    private final ModelMapper modelMapper;
 
-    public CommentService(CommentRepository commentRepository, PostRepository postRepository, UserRepository userRepository, ModelMapper modelMapper) {
+    public CommentService(CommentRepository commentRepository, PostRepository postRepository, UserRepository userRepository) {
         this.commentRepository = commentRepository;
         this.postRepository = postRepository;
         this.userRepository = userRepository;
-        this.modelMapper = modelMapper;
     }
-    public List<CommentDTO> findAllComments() {
+    public List<Comment> findAllComments() {
         List<Comment> comments= commentRepository.findAll();
-        Type listType = new TypeToken<List<CommentDTO>>() {}.getType();
-        return modelMapper.map(comments, listType);
+        return comments;
     }
     public Comment findCommentById(Long id){
         Optional<Comment> optionalComment = commentRepository.findById(id);

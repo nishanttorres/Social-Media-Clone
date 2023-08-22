@@ -1,6 +1,7 @@
 package com.diyo.smc.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.diyo.smc.model.UserDTO;
+import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Max;
@@ -34,6 +35,5 @@ public class Post {
     private List<Comment> comments;
     @ManyToOne
     @JoinColumn(name = "user_id")
-    @JsonIgnore
     private User user;
 }

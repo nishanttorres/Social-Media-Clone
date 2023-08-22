@@ -1,6 +1,5 @@
 package com.diyo.smc.service;
 
-import com.diyo.smc.entity.Comment;
 import com.diyo.smc.entity.Post;
 import com.diyo.smc.entity.User;
 import com.diyo.smc.repository.PostRepository;
@@ -23,7 +22,8 @@ public class PostService {
     }
 
     public List<Post> findAllPostsByUserId(Long userId){
-        return this.postRepository.findAllByUserId(userId);
+        List<Post> posts = postRepository.findAllByUserId(userId);
+        return posts;
     }
 
     public List<Post> findAllPosts(){
@@ -50,6 +50,10 @@ public class PostService {
     public String deletePostById(Long postId){
         Optional<Post> postOptional = postRepository.findById(postId);
         if (postOptional.isPresent()){
+            List<User> usersWithThisPostLiked = userRepository.findAllByLikedPostsId(postId);
+            for(User user: usersWithThisPostLiked){
+                user.getLikedPostsId().remove(postId);
+            }
             postRepository.deleteById(postId);
             return "Post deleted successfully!";
         }
@@ -65,9 +69,6 @@ public class PostService {
             old.setDate(new Date());
             if(post.getNumberOfLikes() >= 0){
                 old.setNumberOfLikes(post.getNumberOfLikes());
-            }
-            if(post.getComments() != null){
-                old.setComments(post.getComments());
             }
             if(post.getUser() != null){
                 old.setUser(post.getUser());

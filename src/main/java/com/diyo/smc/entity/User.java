@@ -2,17 +2,11 @@ package com.diyo.smc.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import jakarta.servlet.annotation.ServletSecurity;
-import jakarta.validation.constraints.NotBlank;
-import jdk.jfr.Timestamp;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.Cascade;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 @Data
@@ -29,11 +23,13 @@ public class User {
     private LocalDate dob;
     private String email;
     private String password;
-    @OneToMany(mappedBy = "user" ,cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     @JsonIgnore
     private List<Post> posts;
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     @JsonIgnore
     private List<Comment> comments;
-
+    @ElementCollection
+    @Column(name = "liked_posts_id")
+    private List<Long> likedPostsId;
 }

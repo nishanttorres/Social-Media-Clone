@@ -53,13 +53,14 @@ public class UserService {
                 old.setEmail(user.getEmail());
             }if(user.getPassword() != null){
                 old.setPassword(user.getPassword());
+            }if(user.getLikedPostsId() != null){
+                old.setLikedPostsId(user.getLikedPostsId());
             }
             userRepository.save(old);
             return "User Modified Successfully.";
         }
         return "User not found!";
     }
-
     public User validateUser(User user) {
         Optional<User> userOptional = userRepository.findByEmailAndPassword(user.getEmail(), user.getPassword());
         if(userOptional.isPresent()){

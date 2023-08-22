@@ -1,7 +1,6 @@
 package com.diyo.smc.controller;
 
 import com.diyo.smc.entity.Comment;
-import com.diyo.smc.model.CommentDTO;
 import com.diyo.smc.service.CommentService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +19,7 @@ public class CommentController {
     }
 
     @GetMapping
-    public ResponseEntity<List<CommentDTO>> findAllComments(){
+    public ResponseEntity<List<Comment>> findAllComments(){
         return ResponseEntity.ok(commentService.findAllComments());
     }
 

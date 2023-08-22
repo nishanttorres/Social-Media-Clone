@@ -36,7 +36,6 @@ public class UserController {
     public ResponseEntity<String> deleteUserById(@PathVariable("userId")Long userId){
         return ResponseEntity.ok(userService.deleteUserById(userId));
     }
-
     @PatchMapping
     public ResponseEntity<String> editUser(@RequestBody User user){
         return ResponseEntity.ok(userService.editUser(user));
