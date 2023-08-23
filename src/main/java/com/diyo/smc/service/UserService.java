@@ -55,6 +55,10 @@ public class UserService {
                 old.setPassword(user.getPassword());
             }if(user.getLikedPostsId() != null){
                 old.setLikedPostsId(user.getLikedPostsId());
+            }if(user.getFollowersUsersId() != null){
+                old.setFollowersUsersId(user.getFollowersUsersId());
+            }if(user.getFollowingUsersId() != null){
+                old.setFollowingUsersId(user.getFollowingUsersId());
             }
             userRepository.save(old);
             return "User Modified Successfully.";

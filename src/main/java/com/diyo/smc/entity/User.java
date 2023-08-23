@@ -32,4 +32,9 @@ public class User {
     @ElementCollection
     @Column(name = "liked_posts_id")
     private List<Long> likedPostsId;
+    @ElementCollection
+    private List<Long> followingUsersId;
+    @ElementCollection
+    private List<Long> followersUsersId;
+
 }
